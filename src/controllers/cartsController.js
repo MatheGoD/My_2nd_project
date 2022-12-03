@@ -2,7 +2,7 @@ const { cartsService } = require('../services');
 const { catchAsync } = require('../utils/err');
 
 const showCart = catchAsync(async (req, res) => {
-    const user_id = req.body.id;
+    const user_id = req.user.id;
 
     const result = await cartsService.showCart(user_id);
     if (!result[0]) {
@@ -12,7 +12,7 @@ const showCart = catchAsync(async (req, res) => {
 });
 
 const addCart = catchAsync(async (req, res) => {
-    const user_id = req.body.id;
+    const user_id = req.user.id;
     const writing_id = req.body.writing_id;
 
     const result = await cartsService.addCart(user_id, writing_id);
