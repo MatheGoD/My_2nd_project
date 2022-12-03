@@ -1,9 +1,11 @@
-const express = require("express");
-const { likesRoutes } = require("./likesRoutes");
-const { writingsRoutes } = require("./writingsRoutes");
+const express = require('express');
+const { likesRoutes } = require('./likesRoutes');
+const { writingsRoutes } = require('./writingsRoutes');
+const { cartsRoutes } = require('./cartsRoutes');
 const routes = express.Router();
 
-routes.use("/likes", likesRoutes);
-routes.use("/writings", writingsRoutes);
+routes.use('/likes', likesRoutes);
+routes.use('/writings', writingsRoutes);
+routes.use('/carts', cartsRoutes);
 
 module.exports = { routes };
