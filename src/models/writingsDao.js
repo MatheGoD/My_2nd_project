@@ -108,17 +108,17 @@ const getWritingInfo = async (writing_id) => {
            WHERE al.author_id = w.user_id
            GROUP BY al.author_id
         ) as subscribers,
-        w.color_id
+        c.color
         FROM
         writings w
         LEFT join users u on w.user_id = u.id
         LEFT join users_like_writings lw on w.id = lw.writing_id
+        LEFT JOIN colors c ON c.id = w.color_id
         where w.id= ?
         GROUP by w.title
         `,
         [writing_id]
     );
-
     return result;
 };
 

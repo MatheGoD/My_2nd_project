@@ -3,7 +3,6 @@ const { catchAsync } = require('../utils/err');
 
 const showCart = catchAsync(async (req, res) => {
     const user_id = req.user;
-
     const result = await cartsService.showCart(user_id);
     if (!result[0]) {
         return res.status(204).end();

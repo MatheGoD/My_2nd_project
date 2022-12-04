@@ -40,6 +40,14 @@ const getMyWritings = async (user_id) => {
             w.id,
             w.title,
             w.header_image,
+            (
+                SELECT
+                    u.name
+                    FROM
+                        users u
+                    WHERE
+                        u.id = w.user_id
+            ) as authors,
             w.content
         FROM 
             writings w
