@@ -55,7 +55,8 @@ const getMyWritings = async (user_id) => {
 const getMyLikes = async (user_id) => {
     const result = appDataSource.query(
         `
-        SELECT
+        SELECT 
+            w.id,
             uw.id,
             w.title,
             w.content,
@@ -84,6 +85,7 @@ const getMyPurchase = async (user_id) => {
     const result = appDataSource.query(
         `
         SELECT
+            w.id,
             ph.id,
             w.title,
             w.content,
