@@ -30,11 +30,8 @@ const createWriting = catchAsync(async (req, res) => {
 });
 
 const getWritingInfo = catchAsync(async (req, res) => {
-    const { writing_Id } = req.params;
-    if (isNaN(writing_Id)) {
-        throw new CustomError('BAD_REQUEST', 400);
-    }
-    const writing = await writingsService.getWritingInfo(writing_Id);
+    const { writing_id } = req.params;
+    const writing = await writingsService.getWritingInfo(writing_id);
 
     return res.status(200).json({ writing });
 });

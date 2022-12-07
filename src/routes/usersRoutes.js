@@ -3,9 +3,9 @@ const { usersController } = require('../controllers');
 
 const usersRoutes = express.Router();
 
-usersRoutes.get('', usersController.getUserInformation);
-usersRoutes.get('/mywritings', usersController.getMyWritings);
-usersRoutes.get('/mylikes', usersController.getMyLikes);
-usersRoutes.get('/mypurchase', usersController.getMyPurchase);
+usersRoutes.post('', usersController.getUserInformation);
+usersRoutes.post('/mywritings', usersController.getMyWritings);
+usersRoutes.post('/mylikes', usersController.getMyLikes);
+usersRoutes.post('/mypurchase', usersController.getMyPurchase);
 
 module.exports = { usersRoutes };

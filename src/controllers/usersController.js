@@ -2,7 +2,7 @@ const { usersService } = require('../services');
 const { catchAsync } = require('../utils/err');
 
 const getUserInformation = catchAsync(async (req, res) => {
-    const user_id = req.user.id;
+    const user_id = req.user;
 
     const result = await usersService.getUserInformation(user_id);
 
@@ -10,7 +10,7 @@ const getUserInformation = catchAsync(async (req, res) => {
 });
 
 const getMyWritings = catchAsync(async (req, res) => {
-    const user_id = req.user.id;
+    const user_id = req.user;
 
     const result = await usersService.getMyWritings(user_id);
 
@@ -18,7 +18,7 @@ const getMyWritings = catchAsync(async (req, res) => {
 });
 
 const getMyLikes = catchAsync(async (req, res) => {
-    const user_id = req.user.id;
+    const user_id = req.user;
 
     const result = await usersService.getMyLikes(user_id);
 
@@ -26,7 +26,7 @@ const getMyLikes = catchAsync(async (req, res) => {
 });
 
 const getMyPurchase = catchAsync(async (req, res) => {
-    const user_id = req.user.id;
+    const user_id = req.user;
 
     const result = await usersService.getMyPurchase(user_id);
 

@@ -5,7 +5,6 @@ const { authService } = require('../services');
 const loginRequired = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-
         if (!token) {
             const error = new Error('NEED_ACCESS_TOKEN');
             error.statusCode = 401;
@@ -24,7 +23,6 @@ const loginRequired = async (req, res, next) => {
         }
 
         req.user = user.id;
-        console.log(req.user);
         next();
     } catch (err) {
         next(err);
