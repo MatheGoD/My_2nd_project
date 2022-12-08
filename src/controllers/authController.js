@@ -5,6 +5,7 @@ const signIn = catchAsync(async (req, res) => {
     try {
         const { KAKAO_CODE } = req.body;
         const userInfo = await authService.kakaoLogin(KAKAO_CODE);
+        console.log(userInfo);
 
         return res.status(200).json({ userInfo: userInfo });
     } catch (err) {

@@ -15,11 +15,13 @@ const showCart = async (user_id) => {
                 FROM
                     users u
                 WHERE u.id = w.user_id
-            ) as authors
+            ) as authors,
+            colors.color
         FROM
             carts c
-        JOIN writings w ON w.id = c.writing_id
-        JOIN users u ON u.id = c.user_id
+        LEFT JOIN writings w ON w.id = c.writing_id
+        LEFT JOIN users u ON u.id = c.user_id
+        LEFT JOIN colors ON colors.id = w.color_id
         WHERE u.id = ?
         `,
         [user_id]

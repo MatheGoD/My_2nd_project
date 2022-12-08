@@ -39,10 +39,12 @@ const getAllWritings = async (price, limit, offset) => {
             users u
           WHERE
             u.id = w.user_id
-        ) as authors
+        ) as authors,
+        c.color
         FROM writings w
+        LEFT JOIN colors c ON w.color_id = c.id
         ?
-        ORDER BY w.created_at ASC
+        ORDER BY w.id ASC
         ?
         `,
         [whereList, limitOffset]
@@ -51,7 +53,7 @@ const getAllWritings = async (price, limit, offset) => {
 };
 
 const setLimitOffset = (limit, offset) => {
-    if (!limit) limit = 10;
+    if (!limit) limit = 8;
     if (!offset) offset = 0;
     return {
         toSqlString: function () {
@@ -60,13 +62,16 @@ const setLimitOffset = (limit, offset) => {
     };
 };
 
-const makeWhereList = (price) => {
+const makeWhereList = (price, cate_id) => {
     const startLine = `WHERE `;
-    const priceFilter = [`w.id IS NOT NULL`];
-    if (price) {
-        priceFilter.push(`w.price = ${price}`);
+    const filter = [`w.id IS NOT NULL`];
+    if (cate_id) {
+        filter.push(`w.category_id = ${cate_id}`);
     }
-    const body = priceFilter.join(' AND ');
+    if (price) {
+        filter.push(`w.price = ${price}`);
+    }
+    const body = filter.join(' AND ');
     const combined = startLine + body;
     return {
         toSqlString: function () {
@@ -75,18 +80,19 @@ const makeWhereList = (price) => {
     };
 };
 
-const createWriting = async (user_id, title, content, header_image, price, category_id) => {
+const createWriting = async (user_id, title, content, header_image, price, category_id, color_id) => {
     await appDataSource.query(
         `
         INSERT INTO writings (
             title,
             content,
             header_image,
+            color_id,
             price,
             category_id,
             user_id
-        ) VALUES (?,?,?,?,?,?)`,
-        [title, content, header_image, price, category_id, user_id]
+        ) VALUES (?,?,?,?,?,?,?)`,
+        [title, content, header_image, color_id, price, category_id, user_id]
     );
 };
 
@@ -94,6 +100,7 @@ const getWritingInfo = async (writing_id) => {
     const result = await appDataSource.query(
         `
         SELECT
+        w.id,
         w.title,
         w.content,
         w.price,
@@ -106,7 +113,6 @@ const getWritingInfo = async (writing_id) => {
            COUNT(al.author_id)
            FROM authors_likes al 
            WHERE al.author_id = w.user_id
-           GROUP BY al.author_id
         ) as subscribers,
         c.color
         FROM
@@ -122,4 +128,23 @@ const getWritingInfo = async (writing_id) => {
     return result;
 };
 
-module.exports = { searchTitle, getAllWritings, createWriting, getWritingInfo };
+const categoryList = async () => {
+    const result = await appDataSource.query(
+        `SELECT 
+        * FROM categories
+        ORDER BY id ASC`
+    );
+    return result;
+};
+
+const getColorList = async () => {
+    const result = await appDataSource.query(
+        `
+        SELECT
+        * FROM colors
+        ORDER BY id ASC`
+    );
+    return result;
+};
+
+module.exports = { searchTitle, getAllWritings, createWriting, getWritingInfo, categoryList, getColorList };

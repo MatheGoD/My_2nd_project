@@ -11,20 +11,19 @@ const searchTitle = catchAsync(async (req, res) => {
     return res.status(200).json({ result });
 });
 
-const getAllWritings = catchAsync(async (req, res) => {
-    const { price, limit, offset } = req.query;
+const getWritings = catchAsync(async (req, res) => {
+    const { price, cate_id, limit, offset } = req.query;
 
-    const result = await writingsService.getAllWritings(price, limit, offset);
+    const result = await writingsService.getWritings(price, cate_id, limit, offset);
 
     return res.status(200).json({ result });
 });
 
 const createWriting = catchAsync(async (req, res) => {
-    // const user_id = req.user.id;
-    const { user_id, title, content, header_image, price, category_id } = req.body;
-    console.log(req.body);
+    const user_id = req.user;
+    const { title, content, header_image, price, category_id, color_id } = req.body;
 
-    await writingsService.createWriting(user_id, title, content, header_image, price, category_id);
+    await writingsService.createWriting(user_id, title, content, header_image, price, category_id, color_id);
 
     return res.status(201).json({ message: 'WRITING CREATED' });
 });
@@ -36,8 +35,23 @@ const getWritingInfo = catchAsync(async (req, res) => {
     return res.status(200).json({ writing });
 });
 
-const editWriting = catchAsync(async (req, res) => {});
+const getMainList = catchAsync(async (req, res) => {
+    const result = await writingsService.getMainList();
 
-const deleteWriting = catchAsync(async (req, res) => {});
+    return res.status(200).json({ result });
+});
 
-module.exports = { searchTitle, getAllWritings, createWriting, editWriting, deleteWriting, getWritingInfo };
+const getColorList = catchAsync(async (req, res) => {
+    const result = await writingsService.getColorList();
+
+    return res.status(200).json({ result });
+});
+
+module.exports = {
+    searchTitle,
+    getWritings,
+    createWriting,
+    getWritingInfo,
+    getMainList,
+    getColorList,
+};

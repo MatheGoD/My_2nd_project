@@ -5,7 +5,7 @@ const showCart = catchAsync(async (req, res) => {
     const user_id = req.user;
     const result = await cartsService.showCart(user_id);
     if (!result[0]) {
-        return res.status(204).end();
+        return res.status(200).json({ message: '장바구니가 비어있습니다.' });
     }
     return res.status(200).json({ result });
 });
@@ -13,7 +13,6 @@ const showCart = catchAsync(async (req, res) => {
 const addCart = catchAsync(async (req, res) => {
     const user_id = req.user;
     const writing_id = req.body.writing_id;
-
     const result = await cartsService.addCart(user_id, writing_id);
 
     return res.status(200).json({ message: result });

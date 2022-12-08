@@ -7,6 +7,7 @@ const { authRoutes } = require('./authRoutes');
 const { paymentRoutes } = require('./paymentRoutes');
 const routes = express.Router();
 
+routes.use('/main', writingsRoutes);
 routes.use('/likes', likesRoutes);
 routes.use('/writings', writingsRoutes);
 routes.use('/carts', cartsRoutes);

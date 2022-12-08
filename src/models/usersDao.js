@@ -34,7 +34,7 @@ const getUserInformation = async (user_id) => {
 };
 
 const getMyWritings = async (user_id) => {
-    const result = appDataSource.query(
+    const result = await appDataSource.query(
         `
         SELECT
             w.id,
@@ -48,9 +48,11 @@ const getMyWritings = async (user_id) => {
                     WHERE
                         u.id = w.user_id
             ) as authors,
-            w.content
+            w.content,
+            c.color
         FROM 
             writings w
+        LEFT JOIN colors c ON c.id = w.color_id
         WHERE 
             w.user_id = ?
         LIMIT 4;
@@ -61,7 +63,7 @@ const getMyWritings = async (user_id) => {
 };
 
 const getMyLikes = async (user_id) => {
-    const result = appDataSource.query(
+    const result = await appDataSource.query(
         `
         SELECT 
             w.id,
@@ -76,10 +78,12 @@ const getMyLikes = async (user_id) => {
                 WHERE
                     u.id = w.user_id
             ) as authors,
-            w.header_image
+            w.header_image,
+            c.color
         FROM
             users_like_writings uw
         JOIN writings w ON uw.writing_id = w.id
+        LEFT JOIN colors c ON c.id = w.color_id
         WHERE
             uw.user_id = ?
         LIMIT 4
@@ -90,7 +94,7 @@ const getMyLikes = async (user_id) => {
 };
 
 const getMyPurchase = async (user_id) => {
-    const result = appDataSource.query(
+    const result = await appDataSource.query(
         `
         SELECT
             w.id,
