@@ -11,7 +11,6 @@ const getUserInformation = catchAsync(async (req, res) => {
 
 const getMyWritings = catchAsync(async (req, res) => {
     const user_id = req.user;
-
     const result = await usersService.getMyWritings(user_id);
 
     return res.status(200).json({ result });

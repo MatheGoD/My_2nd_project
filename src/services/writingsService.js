@@ -4,16 +4,27 @@ const searchTitle = async (searchWord) => {
     return await writingsDao.searchTitle(searchWord);
 };
 
-const getAllWritings = async (price, offset, limit) => {
+const getWritings = async (price, offset, limit) => {
     return await writingsDao.getAllWritings(price, offset, limit);
 };
 
-const createWriting = async (user_id, title, content, header_image, price, category_id) => {
-    return await writingsDao.createWriting(user_id, title, content, header_image, price, category_id);
+const createWriting = async (user_id, title, content, header_image, price, category_id, color_id) => {
+    return await writingsDao.createWriting(user_id, title, content, header_image, price, category_id, color_id);
 };
 
 const getWritingInfo = async (writing_Id) => {
     return await writingsDao.getWritingInfo(writing_Id);
 };
 
-module.exports = { searchTitle, getAllWritings, createWriting, getWritingInfo };
+const getMainList = async () => {
+    const categoryList = await writingsDao.categoryList();
+    const writing = await writingsDao.getAllWritings();
+    const set = { category: categoryList, writing: writing };
+    return set;
+};
+
+const getColorList = async () => {
+    return await writingsDao.getColorList();
+};
+
+module.exports = { searchTitle, getWritings, createWriting, getWritingInfo, getMainList, getColorList };

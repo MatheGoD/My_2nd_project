@@ -2,7 +2,6 @@ const axios = require('axios');
 const { paymentDao } = require('../models');
 const arrangePayment = async (item_name, quantity, total_amount, tax_free_amount) => {
     const APP_ADMIN_KEY = process.env.APP_ADMIN_KEY;
-    ////////////////////////////////////////////////////////////
     const payment = await axios({
         method: 'post',
         url: 'https://kapi.kakao.com/v1/payment/ready',
@@ -30,7 +29,6 @@ const arrangePayment = async (item_name, quantity, total_amount, tax_free_amount
 
 const finalizePayment = async (user_id, tid, pg_token) => {
     const ADMIN_KEY = process.env.APP_ADMIN_KEY;
-
     const response = await axios({
         method: 'post',
         url: 'https://kapi.kakao.com/v1/payment/approve',
@@ -51,7 +49,6 @@ const finalizePayment = async (user_id, tid, pg_token) => {
         err.status = 400;
         throw err;
     }
-
     const { item_name, amount, aid } = response.data;
     const price = amount.total;
     await paymentDao.purchaseList(user_id, item_name, price, aid);
