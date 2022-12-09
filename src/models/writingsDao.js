@@ -21,9 +21,9 @@ const searchTitle = async (searchWord) => {
     return result;
 };
 
-const getAllWritings = async (price, limit, offset) => {
+const getAllWritings = async (price, cate_id, limit, offset) => {
     const limitOffset = setLimitOffset(limit, offset);
-    const whereList = makeWhereList(price);
+    const whereList = makeWhereList(price, cate_id);
     const result = await appDataSource.query(
         `
         SELECT

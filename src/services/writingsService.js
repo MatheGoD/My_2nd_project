@@ -4,8 +4,8 @@ const searchTitle = async (searchWord) => {
     return await writingsDao.searchTitle(searchWord);
 };
 
-const getWritings = async (price, offset, limit) => {
-    return await writingsDao.getAllWritings(price, offset, limit);
+const getWritings = async (price, cate_id, offset, limit) => {
+    return await writingsDao.getAllWritings(price, cate_id, offset, limit);
 };
 
 const createWriting = async (user_id, title, content, header_image, price, category_id, color_id) => {

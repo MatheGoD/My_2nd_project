@@ -67,7 +67,6 @@ const getMyLikes = async (user_id) => {
         `
         SELECT 
             w.id,
-            uw.id,
             w.title,
             w.content,
             (
