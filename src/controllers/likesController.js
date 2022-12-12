@@ -19,4 +19,9 @@ const likeAuthor = catchAsync(async (req, res) => {
     return res.status(200).json({ message: result });
 });
 
-module.exports = { likeWriting, likeAuthor };
+const isLiked = catchAsync(async (req, res) => {
+    const result = await likesService.isLiked();
+    return res.status(200).json({ result });
+});
+
+module.exports = { likeWriting, likeAuthor, isLiked };

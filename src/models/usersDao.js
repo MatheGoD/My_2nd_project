@@ -1,6 +1,6 @@
 const { appDataSource } = require('./data-source');
 
-const getUserInformation = async (user_id) => {
+const getUserInfo = async (user_id) => {
     const result = await appDataSource.query(
         `
         SELECT
@@ -92,33 +92,4 @@ const getMyLikes = async (user_id) => {
     return result;
 };
 
-const getMyPurchase = async (user_id) => {
-    const result = await appDataSource.query(
-        `
-        SELECT
-            w.id,
-            ph.id,
-            w.title,
-            w.content,
-            (
-            SELECT
-                u.name
-                FROM
-                    users u
-                WHERE
-                    u.id = w.user_id
-            ) as authors,
-            w.header_image
-        FROM
-            purchase_history ph
-        JOIN writings w ON ph.writing_id = w.id
-        WHERE
-            ph.user_id = ?
-        LIMIT 4
-        `,
-        [user_id]
-    );
-    return result;
-};
-
-module.exports = { getUserInformation, getMyWritings, getMyLikes, getMyPurchase };
+module.exports = { getUserInfo, getMyWritings, getMyLikes };
