@@ -32,15 +32,6 @@
   <img src="https://img.shields.io/badge/trello-0052CC?style=for-the-badge&logo=Trello&logoColor=white"> 
 </p>
 
-#### ERD 설계
-
-<p>
- <img src ="https://ifh.cc/v-T9QWLP">
-</p>
-
-### Demo
-
-<a href="https://drive.google.com/file/d/17x1wNOCO07Vvt7bqkH9kv6i-WV3m0EDh/view?usp=share_link" target="_blank">bZrunch</a>
 
 ### 구현 기능
 
