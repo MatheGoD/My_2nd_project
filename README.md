@@ -32,6 +32,8 @@
   <img src="https://img.shields.io/badge/trello-0052CC?style=for-the-badge&logo=Trello&logoColor=white"> 
 </p>
 
+### 영상 시연
+https://www.youtube.com/watch?v=lw5DjaUo_PU
 
 ### 구현 기능
 
