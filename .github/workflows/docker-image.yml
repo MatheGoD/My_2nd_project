@@ -34,16 +34,3 @@ jobs:
               uses: docker/build-push-action@v2
               with:
                   push: true
-     - name: Install SSH client
-        run: sudo apt-get update && sudo apt-get install -y openssh-client
-
-      - name: Deploy to EC2 instance
-        uses: easingthemes/ssh-deploy@v2
-        with:
-          server: ${{ secrets.SERVER_IP }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          script: |
-            sudo docker-compose pull
-            sudo docker-compose up -d
