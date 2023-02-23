@@ -57,4 +57,4 @@ jobs:
             - name: Docker run
               run: |
                   docker ps -q --filter "name={your image name}" | grep -q . && docker stop {your image name} && docker rm -fv {your image name}
-                  docker run -d -p 8080:8080 --name cicd --restart always ${{ env.DOCKER_IMAGE }}:${{ env.VERSION }}
+                  docker run -d -p 3000:3000 --name cicd --restart always ${{ env.DOCKER_IMAGE }}:${{ env.VERSION }}
