@@ -54,3 +54,5 @@
 |       **Search**        |       ![검색gif](https://user-images.githubusercontent.com/110155085/206892848-81d24fd9-1635-4d27-8d68-c47d7287313d.gif)       |                       - 쿼리 스트링으로 실시간 검색 기능 구현                        |     FE-`이유주`<br>BE-`이동근`      |
 |   **카카오페이 결제**   |    ![카카오페이gif](https://user-images.githubusercontent.com/110155085/206892734-b064aba3-a9c8-4cb6-8dd1-aa96aed6876c.gif)    |                       - 카카오페이 API 사용하여 결제 기능 구현                       |     FE-`김보윤`<br>BE-`오현상`      |
 |     **마이페이지**      |    ![마이페이지gif](https://user-images.githubusercontent.com/110155085/206890374-f04f9df5-e710-4623-8b83-ebf2ca60083c.gif)    |                          - 좋아요,구매,내가 쓴 글 불러오기                           |     FE-`이유주`<br>BE-`오현상`      |
+
+수정
